@@ -1,6 +1,7 @@
 import dotenv, { configDotenv } from 'dotenv'
 // import 'dotenv/config'
 import connectDB from './db/index.js'
+import { app } from './app.js'
 
 
 dotenv.config({
@@ -8,6 +9,12 @@ dotenv.config({
 })
 
 connectDB()
+    .then(() => {
+        app.listen(process.env.PORT || 8000, () => {
+            console.log(`backend running on ${process.env.PORT}.`)
+        })
+    })
+    .catch((err) => console.log("MONGODB src/index.js error! ", err))
 
 // const app = express()
 
